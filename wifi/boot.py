@@ -1,4 +1,5 @@
 # boot.py - Runs first on Pico W startup
+import asyncio
 import network
 import time
 import sys
@@ -49,8 +50,8 @@ def connect_wifi(ssid, password, hostname):
     print(f"Connecting to Wi-Fi SSID: {ssid} ...")
     start_time = time.time()
     while not wlan.isconnected():
-        if time.time() - start_time > 15:  # Timeout after 15 seconds
-            raise TimeoutError("Wi-Fi connection timed out.")
+        if time.time() - start_time > 30:  # Timeout after 15 seconds
+            raise asyncio.TimeoutError("Wi-Fi connection timed out.")
         time.sleep(0.5)
 
     ip_info = wlan.ifconfig()  # (IP, subnet, gateway, DNS)
@@ -65,3 +66,4 @@ try:
 except Exception as e:
     print("Boot setup failed:", e)
     sys.print_exception(e)
+
