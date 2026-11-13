@@ -1,0 +1,5 @@
+{
+    "ssid": "YourWiFiSSID",
+    "password": "YourWiFiPassword",
+    "hostname": "pico-w-device"
+}
